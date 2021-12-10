@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaLongArrowAltRight } from 'react-icons/fa';
 import './styles.scss';
 const ServicesBlock = () => {
 
@@ -11,72 +12,72 @@ const ServicesBlock = () => {
         </div>
         <div className="services-container" >
           <div className="services-grid">
-            <div className="services-grid-cell">
-              <Link to="/business-register" >
+            <Link to="/business-register" className="services-grid-cell">
+              <div>
                 <h2 className="grid-cell-index">01</h2>
                 <div className="grid-cell-container">
-                  <span className="more-details-link">more <i className="fas fa-long-arrow-alt-right"></i></span>
+                  <span className="more-details-link">more <FaLongArrowAltRight /></span>
                   <div className="grid-cell-title">
                     <h2>Business Registration</h2>
                   </div>
                 </div>
-              </Link>
-            </div>
-            <div className="services-grid-cell">
-              <Link offset="0" to="/patenting-register">
+              </div>
+            </Link>
+            <Link to="/patenting-register" className="services-grid-cell">
+              <div>
                 <h2 className="grid-cell-index">02</h2>
                 <div className="grid-cell-container">
-                  <span className="more-details-link">more <i className="fas fa-long-arrow-alt-right"></i></span>
+                  <span className="more-details-link">more <FaLongArrowAltRight /></span>
                   <div className="grid-cell-title">
                     <h2>Patenting</h2>
                   </div>
                 </div>
-              </Link>
-            </div>
-            <div className="services-grid-cell">
-              <Link to="/licensing-register">
-              <h2 className="grid-cell-index">03</h2>
-              <div className="grid-cell-container">
-                <span className="more-details-link">more <i className="fas fa-long-arrow-alt-right"></i></span>
-                <div className="grid-cell-title">
-                  <h2>Licensing</h2>
+              </div>
+            </Link>
+            <Link to="/licensing-register" className="services-grid-cell">
+              <div>
+                <h2 className="grid-cell-index">03</h2>
+                <div className="grid-cell-container">
+                  <span className="more-details-link">more <FaLongArrowAltRight /></span>
+                  <div className="grid-cell-title">
+                    <h2>Licensing</h2>
+                  </div>
                 </div>
               </div>
-              </Link>
-            </div>
-            <div className="services-grid-cell">
-              <Link to="/stream-register">
+            </Link>
+            <Link to="/stream-register" className="services-grid-cell">
+              <div>
                 <h2 className="grid-cell-index">04</h2>
                 <div className="grid-cell-container">
-                  <span className="more-details-link">more <i className="fas fa-long-arrow-alt-right"></i></span>
+                  <span className="more-details-link">more <FaLongArrowAltRight /></span>
                   <div className="grid-cell-title">
                     <h2>Investor's Pitch Stream</h2>
                   </div>
                 </div>
-              </Link>
-            </div>
-            <div className="services-grid-cell">
-              <Link to="/residency-register">
+              </div>
+            </Link>
+            <Link to="/residency-register" className="services-grid-cell">
+              <div>
                 <h2 className="grid-cell-index">05</h2>
                 <div className="grid-cell-container">
-                  <span className="more-details-link">more <i className="fas fa-long-arrow-alt-right"></i></span>
+                  <span className="more-details-link">more <FaLongArrowAltRight /></span>
                   <div className="grid-cell-title">
                     <h2>Residency Visa Packages</h2>
                   </div>
                 </div>
-              </Link>
-            </div>
-            <div className="services-grid-cell">
-              <Link to="/funding-register">
+              </div>
+            </Link>
+            <Link to="/funding-register" className="services-grid-cell">
+              <div>
                 <h2 className="grid-cell-index">06</h2>
                 <div className="grid-cell-container">
-                  <span className="more-details-link">more <i className="fas fa-long-arrow-alt-right"></i></span>
+                  <span className="more-details-link">more <FaLongArrowAltRight /></span>
                   <div className="grid-cell-title">
                     <h2>Crowd Funding</h2>
                   </div>
                 </div>
-              </Link>
-            </div>
+              </div>
+            </Link>
           </div>
         </div>
         <div className="about-us">
@@ -94,7 +95,7 @@ const ServicesBlock = () => {
             </span>
           </article>
           <br/>
-          <span className="more-details-link">more <i className="fas fa-long-arrow-alt-right"></i></span>
+          <span className="more-details-link">more <FaLongArrowAltRight /></span>
         </div>
       </div>
     </section>

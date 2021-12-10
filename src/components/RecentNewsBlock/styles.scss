@@ -1,11 +1,3 @@
-:root{
-  --light-red: #F05454;
-  --navy-blue: #30475E;
-  --dark-blue: #2F465D;
-  --light-black: #222831;
-  --light-gray: #C6C4C4;
-}
-
 .recent-news{
   position: relative;
   margin-top: 50px;
@@ -57,5 +49,9 @@
 .recent-news .container .news-item .content .more-details{
   color: var(--navy-blue);
   margin-top: 5px;
-  display: inline-block
+  display: flex;
+  align-items: center;
+  svg {
+    margin-left: 5px;
+  }
 }

@@ -1,14 +1,21 @@
-#description{
-  width: 80%;
+#description {
+  width: 60%;
   margin-left: auto;
   margin-right: auto;
 }
 
-.description-item dt{
-  color: var(--light-red);
-  font-size: 18px;
+.description-item {
+  dt{
+    color: var(--light-red);
+    font-size: 18px;
+  }
+  dd {
+    color: var(--navy-blue);
+  }
 }
 
-.description-item dd {
-  color: var(--navy-blue);
+@media screen and (max-width: 768px) {
+  #description {
+    width: 80%;
+  }
 }

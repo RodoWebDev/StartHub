@@ -4,7 +4,6 @@ import RegisterForm from 'components/RegisterForm';
 import RecentNewsBlock from 'components/RecentNewsBlock';
 
 import Layout from '../../layout';
-import "./styles.scss";
 
 const PatentingRegister = () => {
   return (

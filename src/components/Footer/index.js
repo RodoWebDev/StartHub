@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import logo from 'assets/images/logo-light.png';
 import api from 'utils/api';
+import { FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa';
 import './styles.scss';
 
 const Footer = () => {
@@ -25,13 +26,13 @@ const Footer = () => {
           <br />
           <address>
             <div className="location">
-              <span className="icon"><i className="fas fa-map-marker-alt"></i></span>
+              <span className="icon"><FaMapMarkerAlt /></span>
               <p>14th Floor, 1 Boulevard Plaza Tower, Sheikh Mohammed Bin Rashid Boulevard Downtown, Dubai, Arab Emirates</p>
             </div>
             <br />
             <br />
             <div className="phonenumber">
-              <span className="icon"><i className="fas fa-phone-alt"></i></span>
+              <span className="icon"><FaPhoneAlt /></span>
               <p>+971 4 368 0833 +971 4 455 8556</p>
             </div>
           </address>

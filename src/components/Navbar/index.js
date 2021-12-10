@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
+import { FaGlobe, FaTimes, FaBars } from 'react-icons/fa';
 import logo from '../../assets/images/logo-dark.png';
 import './styles.scss';
 
@@ -38,10 +39,10 @@ const Navbar = () => {
         </Link>
         <div className="menu-icon">
           <div className="menu-lang-icon" onClick={handleLangClick}>
-            <i className="fas fa-globe"></i>
+            <FaGlobe />
           </div>
           <div className="menu-nav-icon" onClick={handleMenuClick}>
-            <i className={menuClick ? "fas fa-times" : "fas fa-bars"} />
+            {menuClick ? <FaTimes /> : <FaBars />}
           </div>
         </div>
         <div className={location.pathname === "/" ? "menu-container light-theme" : "menu-container dark-theme"}>

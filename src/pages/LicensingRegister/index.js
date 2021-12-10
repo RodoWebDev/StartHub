@@ -3,7 +3,6 @@ import DescriptionList from 'components/DescriptionList';
 import RegisterForm from 'components/RegisterForm';
 import RecentNewsBlock from 'components/RecentNewsBlock';
 import Layout from '../../layout';
-import "./styles.scss";
 
 const LicensingRegister = () => {
   return (

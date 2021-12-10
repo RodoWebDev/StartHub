@@ -1,7 +1,8 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import Header from 'components/Header';
+import Header from 'layout/Header';
 import HeaderWithBackground from 'components/HeaderWithBackground';
+import './styles.scss';
 
 const Layout = (props) => {
   const { children, type = 'no-background', pageTitle = '' } = props

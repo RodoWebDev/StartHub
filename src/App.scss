@@ -4,3 +4,33 @@
   padding: 0;
   font-family: 'Roboto';
 }
+
+:root{
+  --light-red: #F05454;
+  --navy-blue: #30475E;
+  --dark-blue: #2F465D;
+  --light-black: #222831;
+  --light-gray: #C6C4C4;
+}
+
+form {
+  button[type="submit"],
+  input[type="submit"] {
+    background: var(--light-red);
+    border: 1px solid var(--light-red);
+  }
+
+  button[type="submit"]:hover,
+  input[type="submit"]:hover {
+    background: #bf1650 !important;
+  }
+
+  button[type="submit"]:active,
+  input[type="button"]:active,
+  input[type="submit"]:active {
+    transition: 0.3s all;
+    transform: translateY(3px);
+    border: 1px solid transparent;
+    opacity: 0.8;
+  }
+}
