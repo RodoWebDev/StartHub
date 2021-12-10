@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import Header from 'layout/Header';
-import HeaderWithBackground from 'components/HeaderWithBackground';
+import HeaderWithBackground from 'layout/HeaderWithBackground';
 import './styles.scss';
 
 const Layout = (props) => {
