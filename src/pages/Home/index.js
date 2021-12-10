@@ -7,7 +7,7 @@ import './styles.scss';
 
 const Home = () => {
   return (
-    <Layout>
+    <Layout type={'background'}>
       <ServicesBlock />
       <ArchivedBlock />
       <RecentNewsBlock />
