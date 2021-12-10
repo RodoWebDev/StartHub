@@ -1,0 +1,19 @@
+import React from 'react'
+import { withRouter } from 'react-router-dom'
+import Header from 'components/Header';
+import HeaderWithBackground from 'components/HeaderWithBackground';
+
+const Layout = (props) => {
+  const { children, type = 'no-background', pageTitle = '' } = props
+  return (
+    <>
+      {type === 'background' && <HeaderWithBackground />}
+      {type === 'no-background' && <Header title={pageTitle} />}
+      <main>
+        {children}
+      </main>
+    </>
+  )
+}
+
+export default withRouter(Layout)
