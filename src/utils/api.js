@@ -3,13 +3,13 @@ const baseUrl = process.env.REACT_APP_URL;
 
 const api = {
   getPageData: async () => {
-    const result = await instance.get(`${baseUrl}/cms/allPage/`);
+    const result = await instance.get(`${baseUrl}/cms/pages/`);
     if (result.data.data && result.data.data.success) {
       return result.data.data;
     } else {
       return {
         success: false,
-        message: result.data.message
+        message: result.data.data.message
       };
     }
   },

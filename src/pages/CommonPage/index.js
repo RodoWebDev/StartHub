@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import DescriptionList from 'components/DescriptionList';
 import RegisterForm from 'components/RegisterForm';
 import RecentNewsBlock from 'components/RecentNewsBlock';
@@ -17,6 +17,10 @@ const CommonPage = (props) => {
     submitButtonText,
     dropText,
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
   return (
     <Layout pageTitle={pageTitle}>
       <DescriptionList sections={sections}/>

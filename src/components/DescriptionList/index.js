@@ -6,11 +6,11 @@ const DescriptionList = (props) => {
   return (
     <section id="description">
       <div className="description-item">
-        {sections?.map(section => (
-          <dl key={section.id}>
+        {sections?.map((section, i) => (
+          <dl key={i}>
             <dt>{section.subTitle}</dt>
             <br />
-            {section.descriptions.map((desc, index) => (
+            {section.description?.map((desc, index) => (
               <dd key={index}>
                 {desc}
               </dd>

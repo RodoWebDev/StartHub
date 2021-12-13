@@ -14,10 +14,10 @@ const RecentNewsBlock = () => {
         <h2>{title}</h2>
       </div>
       <div className="container">
-        {items.map(item => {
-          const { createdAt, imgUrl, title, description, action, id } = item;
+        {items.map((item, index) => {
+          const { createdAt, imgUrl, title, description, action } = item;
           return (
-            <article className="news-item" key={id}>
+            <article className="news-item" key={index}>
               <img className="image" src={imgUrl} alt="NewsItem"/>
               <div className="content">
                 <h5 className="date">{createdAt}</h5>

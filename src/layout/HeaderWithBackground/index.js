@@ -1,18 +1,21 @@
-import React from 'react';
-import header_bg_img from 'assets/images/header-bg.png';
+import React, { useContext } from 'react';
+import { LoginContext } from 'contexts/LoginContextContainer';
 
 const HeaderWithBackground = () => {
-	return(
+	const { datas } = useContext(LoginContext);
+	const heroData = datas?.filter(data => data.type === "Home")[0]?.sections?.filter(section => section.type === 'Hero')[0];
+	const { title, imgUrl } = heroData;
+	return (
 		<header id="#home" className="header wide">
 			<div className="image-container">
-				<img src={header_bg_img} className="background-image" alt="Landing_Image"/>
+				<img src={imgUrl} className="background-image" alt="Landing_Image"/>
 			</div>
 			<div className="title">
-				<h1>Starting Company</h1>
+				<h1>{title[0]}</h1>
 				<br />
-				<h1>is easy</h1>
+				<h1>{title[1]}</h1>
 			</div>
-	</header>
+		</header>
 	)
 }
 
