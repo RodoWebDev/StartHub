@@ -4,14 +4,15 @@ import ReactDatePicker from "react-datepicker";
 import { FaCloudDownloadAlt, FaCalendar } from 'react-icons/fa';
 import './styles.scss';
 
-const RegisterForm = () => {
+const RegisterForm = (props) => {
   const { control, register, handleSubmit, formState: { errors } } = useForm();
+  const { formType, formTitle, submitButtonText, dropText } = props;
   const onSubmit = data => console.log(data);
 
   return (
     <section id="register_form">
       <div className="form">
-        <h3 className="title">Company Registration Application</h3>
+        <h3 className="title">{formTitle}</h3>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="row">
             <input type="text" placeholder="First Name" {...register("firstname", { max: 20, min: 3, maxLength: 20 })} />
@@ -26,15 +27,23 @@ const RegisterForm = () => {
             {errors.number && "Phone number is required"}
           </div>
           <div className="row">
-            <div className="business">
+            {formType === 'visa' && <div className="business">
+              <select {...register("visa", { required: true })}>
+                <option value="none">Visa</option>
+                <option value="Mrs">Mrs</option>
+                <option value="Miss">Miss</option>
+                <option value="Dr">Dr</option>
+              </select>
+            </div>}
+            {formType !== 'visa' && <div className="business">
               <select {...register("businesstype", { required: true })}>
                 <option value="none">Select Business Type</option>
                 <option value="Mrs">Mrs</option>
                 <option value="Miss">Miss</option>
                 <option value="Dr">Dr</option>
               </select>
-            </div>
-            <div className="date-picker">
+            </div>}
+            {formType !== 'funding' && <div className="date-picker">
               <FaCalendar className="calendar-icon" />
               <Controller
                 control={control}
@@ -47,16 +56,42 @@ const RegisterForm = () => {
                   />
                 )}
               />
-            </div>
+            </div>}
+            {formType === 'funding' && <div className="business">
+              <select {...register("fundRaising", { required: true })}>
+                <option value="none">Are you actively fund raising for current or upcoming?</option>
+                <option value="Mrs">Mrs</option>
+                <option value="Miss">Miss</option>
+                <option value="Dr">Dr</option>
+              </select>
+            </div>}
           </div>
-          <div className="row upload">
+          {formType === 'funding' && <div className="row">
+            <div className="business">
+              <select {...register("firstCrowdFunding", { required: true })}>
+                <option value="none">Is this your first crowd funding?</option>
+                <option value="Mrs">Mrs</option>
+                <option value="Miss">Miss</option>
+                <option value="Dr">Dr</option>
+              </select>
+            </div>
+            <div className="business">
+              <select {...register("loan", { required: true })}>
+                <option value="none">How much do you want to loan now?</option>
+                <option value="Mrs">Mrs</option>
+                <option value="Miss">Miss</option>
+                <option value="Dr">Dr</option>
+              </select>
+            </div>
+          </div>}
+          {formType === 'original' && <div className="row upload">
             <div id="file_uploader">
               <input type="file" {...register("document", { required: true, minLength: 6, maxLength: 12 })} />
               <span id='val'></span>
-              <span id='button'><FaCloudDownloadAlt /> Drop Your Documents Here</span>
+              <span id='button'><FaCloudDownloadAlt />{dropText ? dropText : 'Drop Your Documents Here'}</span>
             </div>
-          </div>
-          <input className="btn submit" type="submit" value="APPLY NOW" />
+          </div>}
+          <input className="btn submit" type="submit" value={submitButtonText} />
         </form>
       </div>
     </section>

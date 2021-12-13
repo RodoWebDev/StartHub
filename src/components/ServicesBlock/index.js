@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FaLongArrowAltRight } from 'react-icons/fa';
+import { LoginContext } from 'contexts/LoginContextContainer';
 import './styles.scss';
+
 const ServicesBlock = () => {
+  const { datas } = useContext(LoginContext);
+  const subPages = datas?.filter(data => data.pageTitle !== "Home");
+  const blockData = datas?.filter(data => data.pageTitle === "Home")[0].sections.filter(section => section.type === 'Business')[0].items;
+
+  const getNumber = (num) => {
+    return num < 10 ? `0${num}` : num;
+  }
 
   return (
     <section className="services" id="services">
@@ -12,7 +21,20 @@ const ServicesBlock = () => {
         </div>
         <div className="services-container" >
           <div className="services-grid">
-            <Link to="/business-register" className="services-grid-cell">
+            {subPages?.map((page, index) => (
+              <Link to={`/${page.type}`} className="services-grid-cell" key={blockData[index]}>
+                <div>
+                  <h2 className="grid-cell-index">{getNumber(index)}</h2>
+                  <div className="grid-cell-container">
+                    <span className="more-details-link">more <FaLongArrowAltRight /></span>
+                    <div className="grid-cell-title">
+                      <h2>{blockData[index]}</h2>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+            {/* <Link to="/business-register" className="services-grid-cell">
               <div>
                 <h2 className="grid-cell-index">01</h2>
                 <div className="grid-cell-container">
@@ -77,7 +99,7 @@ const ServicesBlock = () => {
                   </div>
                 </div>
               </div>
-            </Link>
+            </Link> */}
           </div>
         </div>
         <div className="about-us">
