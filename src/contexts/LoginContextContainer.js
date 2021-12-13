@@ -39,9 +39,9 @@ const tempDatas = [
         type: 'Status',
         title: 'Take your business to Greater Hights in Dubai with StartHub',
         items: [
-          { id: 1, title: 'Registered businesses', value: 8540 },
-          { id: 2, title: 'Patents & Licenses', value: 3580 },
-          { id: 3, title: 'Success', value: 100 },
+          { id: 1, subTitle: 'Registered businesses', value: 8540 },
+          { id: 2, subTitle: 'Patents & Licenses', value: 3580 },
+          { id: 3, subTitle: 'Success', value: 100 },
         ]
       },
       {

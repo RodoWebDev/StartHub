@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import archived_bg_img from 'assets/images/archived-bg.png';
+import { LoginContext } from 'contexts/LoginContextContainer';
 import './styles.scss';
 
 const ArchivedBlock = () => {
+  const { datas } = useContext(LoginContext);
+  const homePage = datas?.filter(data => data.pageTitle === 'Home')[0];
+  const newsData = homePage?.sections?.filter(section => section.type === 'Status')[0];
+  const { title, items } = newsData;
+
   return(
     <section className="archived">
       <div className="container">
@@ -10,21 +16,19 @@ const ArchivedBlock = () => {
           <img  className="image" src={archived_bg_img} alt="Archived_Image"></img>
         </div>
         <div className="title">
-          <h3>Take your business to Greater Hights in Dubai with StartHub</h3>
+          <h3>{title}</h3>
         </div>
         <div className="context">
-          <div className="archived-item">
-            <h5>Registered Businesses</h5>
-            <h2>+ 8540</h2>
-          </div>
-          <div className="archived-item">
-            <h5>Patents &amp; Licenses</h5>
-            <h2>+ 3580</h2>
-          </div>
-          <div className="archived-item">
-            <h5>Successes</h5>
-            <h2>100%</h2>
-          </div>
+          {items.map(item => {
+            const { id, subTitle, value } = item;
+            return (
+              <div className="archived-item" key={id}>
+                <h5>{subTitle}</h5>
+                {id !== 3 && <h2>+ {value}</h2>}
+                {id === 3 && <h2>{value}%</h2>}
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>
