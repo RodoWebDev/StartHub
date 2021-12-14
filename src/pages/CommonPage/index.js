@@ -24,8 +24,8 @@ const CommonPage = (props) => {
   return (
     <Layout pageTitle={pageTitle}>
       <DescriptionList sections={sections}/>
-      {containsNews && <RegisterForm {...formData} />}
-      <RecentNewsBlock />
+      <RegisterForm {...formData} />
+      {containsNews && <RecentNewsBlock />}
     </Layout>
   );
 }
