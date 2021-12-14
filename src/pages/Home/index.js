@@ -18,7 +18,7 @@ const Home = () => {
     <Layout type={'background'}>
       <ServicesBlock />
       <ArchivedBlock />
-      {containsNews && <RecentNewsBlock />}
+      <RecentNewsBlock />
     </Layout> 
   )
 }
