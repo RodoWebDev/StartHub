@@ -25,7 +25,7 @@ const ServicesBlock = () => {
             {subPages?.map((page, index) => (
               <Link to={`/${page.type}`} className="services-grid-cell" key={items[index].title}>
                 <div>
-                  <h2 className="grid-cell-index">{getNumber(index)}</h2>
+                  <h2 className="grid-cell-index">{getNumber(index + 1)}</h2>
                   <div className="grid-cell-container">
                     <span className="more-details-link">more <FaLongArrowAltRight /></span>
                     <div className="grid-cell-title">
