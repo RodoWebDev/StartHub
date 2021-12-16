@@ -10,8 +10,9 @@ const CommonPage = (props) => {
   const { datas } = useContext(LoginContext);
   const componentType = match.path.replace('/', '');
   const currentPage = datas?.filter(data => data.type === componentType)[0];
-  const { pageTitle, sections, containsNews, formType, formTitle, submitButtonText, dropText } = currentPage;
+  const { type, pageTitle, sections, containsNews, formType, formTitle, submitButtonText, dropText } = currentPage;
   const formData = {
+    type,
     formType,
     formTitle,
     submitButtonText,

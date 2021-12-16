@@ -51,6 +51,22 @@ const api = {
       };
     }
   },
+  registerCompany: async (data) => {
+    const headers = {
+      "Content-Type": "form-data"
+    };
+    const result = await instance.post(`${baseUrl}/register/company`, data, headers)
+    if (result.data.data === 'added') {
+      return {
+        success: true,
+      };
+    } else {
+      return {
+        success: false,
+        message: result.data.message
+      };
+    }
+  },
 }
 
 export default api;

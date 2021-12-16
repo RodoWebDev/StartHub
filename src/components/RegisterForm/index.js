@@ -2,12 +2,32 @@ import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import ReactDatePicker from "react-datepicker";
 import { FaCloudDownloadAlt, FaCalendar } from 'react-icons/fa';
+import api from 'utils/api';
 import './styles.scss';
+import { ACTIVITIES_LIST } from 'utils/activities';
 
 const RegisterForm = (props) => {
   const { control, register, handleSubmit, formState: { errors } } = useForm();
-  const { formType, formTitle, submitButtonText, dropText } = props;
-  const onSubmit = data => console.log(data);
+  const { type, formType, formTitle, submitButtonText, dropText } = props;
+  const onSubmit = async (data) => {
+    const formData = new FormData();
+    formData.append("file", data.document[0]);
+    formData.append("businessType", data.businessType);
+    formData.append("applicationDate", data.applicationDate);
+    formData.append("email", data.email);
+    formData.append("firstName", data.firstName);
+    formData.append("lastName", data.lastName);
+    formData.append("phone", data.phone);
+    formData.append("activityType", data.activityType);
+    if (type === "business") {
+      const response = await api.registerCompany(formData);
+      if (response.success) {
+        alert('Company registered!')
+      } else {
+        alert('Company register failure!')
+      }
+    }
+  }
 
   return (
     <section id="register_form">
@@ -15,16 +35,16 @@ const RegisterForm = (props) => {
         <h3 className="title">{formTitle}</h3>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="row">
-            <input type="text" placeholder="First Name" {...register("firstname", { max: 20, min: 3, maxLength: 20 })} />
-            {errors.firstname?.type === 'required' && "First Name is required"}
-            <input type="text" placeholder="Last Name" {...register("lastname", { max: 20, min: 3, maxLength: 20 })} />
-            {errors.lastname?.type === 'required' && "Last Name is required"}
+            <input type="text" placeholder="First Name" {...register("firstName", { max: 20, min: 3, maxLength: 20 })} />
+            {errors.firstName?.type === 'required' && "First Name is required"}
+            <input type="text" placeholder="Last Name" {...register("lastName", { max: 20, min: 3, maxLength: 20 })} />
+            {errors.lastName?.type === 'required' && "Last Name is required"}
           </div>
           <div className="row">
             <input type="text" placeholder="Email" {...register("email", {required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i})} />
             {errors.email && "Email name is required"}
-            <input type="tel" placeholder="Phone" {...register("number", { required: true, minLength: 6, maxLength: 12 })} />
-            {errors.number && "Phone number is required"}
+            <input type="tel" placeholder="Phone" {...register("phone", { required: true, minLength: 6, maxLength: 12 })} />
+            {errors.phone && "Phone number is required"}
           </div>
           <div className="row">
             {formType === 'visa' && <div className="business">
@@ -36,18 +56,17 @@ const RegisterForm = (props) => {
               </select>
             </div>}
             {formType !== 'visa' && <div className="business">
-              <select {...register("businesstype", { required: true })}>
+              <select {...register("businessType", { required: true })}>
                 <option value="none">Select Business Type</option>
-                <option value="Mrs">Mrs</option>
-                <option value="Miss">Miss</option>
-                <option value="Dr">Dr</option>
+                <option value="Technology">Technology</option>
+                <option value="Non-Technology">Non-Technology</option>
               </select>
             </div>}
             {formType !== 'funding' && <div className="date-picker">
               <FaCalendar className="calendar-icon" />
               <Controller
                 control={control}
-                name='date-input'
+                name='applicationDate'
                 render={({ field }) => (
                   <ReactDatePicker
                     placeholderText='Application Date'
@@ -84,9 +103,18 @@ const RegisterForm = (props) => {
               </select>
             </div>
           </div>}
+          {type === 'business' && <div className="row">
+            <div className="activity">
+              <select {...register("activityType", { required: true })}>
+                {ACTIVITIES_LIST.map(activitiy => (
+                  <option value={activitiy.name} key={activitiy.actcode}>{activitiy.name}</option>
+                ))}
+              </select>
+            </div>
+          </div>}
           {formType === 'original' && <div className="row upload">
             <div id="file_uploader">
-              <input type="file" {...register("document", { required: true, minLength: 6, maxLength: 12 })} />
+              <input type="file" {...register("document", { required: true })} />
               <span id='val'></span>
               <span id='button'><FaCloudDownloadAlt />{dropText ? dropText : 'Drop Your Documents Here'}</span>
             </div>
