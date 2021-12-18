@@ -1,0 +1,119 @@
+#company_details_form {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  padding: 30px 60px;
+  margin-top: 40px;
+  .title {
+    font-size: 2rem;
+  }
+  .sub-title {
+    font-size: 1.5rem;
+    text-align: left;
+    margin: 20px;
+  }
+  .small-title {
+    font-size: 1rem;
+    text-align: left;
+    margin: 20px;
+    font-weight: 300;
+  }
+  form {
+    margin-top: 60px;
+    .btn.submit{
+      background: var(--light-red);
+      width: 25%;
+      height: 60px;
+      margin-top: 40px;
+      color: white;
+      border-radius: 50px;
+      border: 1px solid var(--light-red);
+      font-size: 16px;
+    }
+  }
+  .row {
+    display:flex;
+    flex-direction: row;
+    margin-top: 10px;
+    .date-picker{
+      width: 25%;
+      padding-left: 20px;
+      padding-right: 20px;
+      position: relative;
+      .calendar-icon {
+        position: absolute;
+        z-index: 1;
+        color: gray;
+        top: 7px;
+        left: 40px;
+      }
+      input {
+        padding: 0px 20px 0 40px;
+        margin: 0;
+        width: 100%;
+      }
+    }
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      width: 25%;
+      p {
+        margin: 10px 20px 0 20px;
+        text-align: left;
+        color: var(--light-red);
+      }
+    }
+    .half {
+      width: 50%;
+    }
+    input, select {
+      margin-left: 20px;
+      margin-right: 20px;
+      height: 30px;
+      border-radius: 10px;
+      padding: 0px 20px;
+      font-size: 1rem;
+      border-width: 1px;
+    }
+  }
+}
+
+@media screen and (max-width: 960px) {
+  #company_details_form {
+    padding: 60px 20px;
+    form {
+      .row{
+        flex-direction: column;
+        .input-container {
+          width: 100%;
+        }
+        input, select {
+          width: 100%;
+          margin-left: 0;
+          margin-right: 0;
+          margin-top: 10px;
+        }
+      }
+      .row:nth-child(2){
+        margin-top:0;
+      }
+      .btn {
+        &.submit{
+          background: var(--light-red);
+          width: 100%;
+          margin-top: 40px;
+          color: white;
+          border-radius: 50px;
+          border: 1px solid var(--light-red);
+          height: 60px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #company_details_form {
+    width: 80%;
+  }
+}

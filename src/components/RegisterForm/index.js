@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import ReactDatePicker from "react-datepicker";
 import { FaCloudDownloadAlt, FaCalendar } from 'react-icons/fa';
 import api from 'utils/api';
-import './styles.scss';
 import { ACTIVITIES_LIST } from 'utils/activities';
+import { LoginContext } from 'contexts/LoginContextContainer';
+import { useHistory } from 'react-router-dom';
+import './styles.scss';
 
 const RegisterForm = (props) => {
   const { control, register, handleSubmit, formState: { errors } } = useForm();
   const { type, formType, formTitle, submitButtonText, dropText } = props;
+  const { setCompanyId } = useContext(LoginContext);
+  const history = useHistory();
   const onSubmit = async (data) => {
     const formData = new FormData();
     formData.append("file", data.document[0]);
@@ -22,9 +26,11 @@ const RegisterForm = (props) => {
     if (type === "business") {
       const response = await api.registerCompany(formData);
       if (response.success) {
-        alert('Company registered!')
+        alert('Company registered!');
+        setCompanyId(response.data);
+        history.push('/details');
       } else {
-        alert('Company register failure!')
+        alert('Company register failure!');
       }
     }
   }
@@ -32,7 +38,7 @@ const RegisterForm = (props) => {
   return (
     <section id="register_form">
       <div className="form">
-        <h3 className="title">{formTitle}</h3>
+      <h3 className="title">{formTitle}</h3>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="row">
             <input type="text" placeholder="First Name" {...register("firstName", { max: 20, min: 3, maxLength: 20 })} />
@@ -107,7 +113,7 @@ const RegisterForm = (props) => {
             <div className="activity">
               <select {...register("activityType", { required: true })}>
                 {ACTIVITIES_LIST.map(activitiy => (
-                  <option value={activitiy.name} key={activitiy.actcode}>{activitiy.name}</option>
+                  <option value={activitiy.name} key={activitiy.name}>{activitiy.name}</option>
                 ))}
               </select>
             </div>

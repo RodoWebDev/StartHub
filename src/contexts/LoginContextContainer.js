@@ -36,10 +36,12 @@ const LoginContext = React.createContext({
   user: null,
   pagesLoading: false,
   datas: [],
+  companyId: null,
   getPageData: async () => {},
   login: async (email, password) => {},
   register: async (firstName, lastName, email, password) => {},
-  logout: () => {}
+  logout: () => {},
+  setCompanyId: (id) => {}
 });
 export { LoginContext };
 
@@ -47,6 +49,7 @@ const LoginContextContainer = (props) => {
   /* eslint-disable-next-line */
   const [accessToken, setAccessToken] = useLocalStorage('access-token', undefined, (token) => setAuthHeader(`Barear ${token}`));
   const [user, setUser] = useLocalStorage('startHubUser', undefined);
+  const [companyId, setCompanyId] = useState();
   const [datas, setDatas] = useState(tempDatas);
   const [pagesLoading, setPagesLoading] = useState(false);
   /**
@@ -118,10 +121,12 @@ const LoginContextContainer = (props) => {
         user,
         pagesLoading,
         datas,
+        companyId,
         login: loginUser,
         logout: logoutUser,
         register: registerUser,
         getPageData,
+        setCompanyId,
       }}
     >
       { props.children }

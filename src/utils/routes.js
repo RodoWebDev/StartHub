@@ -4,9 +4,10 @@ import Home from 'pages/Home';
 import CommonPage from 'pages/CommonPage';
 import { LoginContext } from 'contexts/LoginContextContainer';
 import Spinner from 'components/Spinner';
+import CompanyDetails from 'pages/CompanyDetails';
 
 export const PublicRoutes = () => {
-  const { datas, pagesLoading } = useContext(LoginContext);
+  const { datas, pagesLoading, companyId } = useContext(LoginContext);
   const subPages = datas?.filter(data => data.pageTitle !== "Home");
 	if (pagesLoading || !datas[0].sections) {
 		return <Spinner />;
@@ -14,6 +15,8 @@ export const PublicRoutes = () => {
   return (
     <Switch>
       <Route exact path='/' component={ Home }/>
+      {/* {companyId && <Route exact path='/details' component={ CompanyDetails }/>} */}
+      <Route exact path='/details' component={ CompanyDetails }/>
       {subPages?.map((page, index) => (
         <Route path={`/${page.type}`} exact component={CommonPage} key={index} />
       ))}
@@ -22,13 +25,15 @@ export const PublicRoutes = () => {
 }
 
 export const PrivateRoutes = () => {
-  const { datas } = useContext(LoginContext);
+  const { datas, companyId } = useContext(LoginContext);
   const subPages = datas?.filter(data => data.pageTitle !== "Home");
   return (
     <Switch>
       <Route exact path='/' component={ Home }/>
-      {subPages.map(page => (
-        <Route path={`/${page.type}`} exact component={CommonPage} key={page.id} />
+      {/* {companyId && <Route exact path='/details' component={ CompanyDetails }/>} */}
+      <Route exact path='/details' component={ CompanyDetails }/>
+      {subPages.map((page, index) => (
+        <Route path={`/${page.type}`} exact component={CommonPage} key={index} />
       ))}
     </Switch>
   )
