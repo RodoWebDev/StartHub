@@ -13,6 +13,17 @@ const api = {
       };
     }
   },
+  getVideos: async () => {
+    const result = await instance.get(`${baseUrl}/register/videos`);
+    if (result.data.data && result.data.data.success) {
+      return result.data.data;
+    } else {
+      return {
+        success: false,
+        message: result.data.data.message
+      };
+    }
+  },
   loginUser: async (user_data) => {
     const result = await instance.post(`${baseUrl}/auth/admin/login`, {
       email: user_data.email,
@@ -56,6 +67,23 @@ const api = {
       "Content-Type": "form-data"
     };
     const result = await instance.post(`${baseUrl}/register/company`, data, headers)
+    if (result.data.data) {
+      return {
+        success: true,
+        data: result.data.data,
+      };
+    } else {
+      return {
+        success: false,
+        message: result.data.message
+      };
+    }
+  },
+  uploadVideo: async (data) => {
+    const headers = {
+      "Content-Type": "form-data"
+    };
+    const result = await instance.post(`${baseUrl}/register/video`, data, headers)
     if (result.data.data) {
       return {
         success: true,

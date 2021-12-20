@@ -4,10 +4,20 @@ import RegisterForm from 'components/RegisterForm';
 import RecentNewsBlock from 'components/RecentNewsBlock';
 import { LoginContext } from 'contexts/LoginContextContainer';
 import Layout from 'layout';
+import Spinner from 'components/Spinner';
+import Videos from 'components/Videos';
 
 const CommonPage = (props) => {
   const { match } = props;
-  const { datas } = useContext(LoginContext);
+  const { pagesLoading, datas } = useContext(LoginContext);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
+  if (pagesLoading || !datas[0].sections) {
+		return <Spinner />;
+	}
   const componentType = match.path.replace('/', '');
   const currentPage = datas?.filter(data => data.type === componentType)[0];
   const { type, pageTitle, sections, containsNews, formType, formTitle, submitButtonText, dropText } = currentPage;
@@ -18,14 +28,11 @@ const CommonPage = (props) => {
     submitButtonText,
     dropText,
   }
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [])
   return (
     <Layout pageTitle={pageTitle}>
       <DescriptionList sections={sections}/>
       {containsNews && <RegisterForm {...formData} />}
+      {type === 'projects' && <Videos />}
       <RecentNewsBlock />
     </Layout>
   );

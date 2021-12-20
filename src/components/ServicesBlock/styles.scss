@@ -11,7 +11,7 @@
       max-width: 50vw;
       right: 10vw;
       text-align: end;
-      z-index: 100;
+      z-index: 1;
       h1 {
         color: var(--light-red);
         font-size: 9vh;
@@ -30,6 +30,7 @@
           position: relative;
           background: var(--navy-blue);
           overflow: hidden;
+          z-index: 2;
           .grid-cell-index {
             color: white;
             font-size: 10vh;

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import ReactDatePicker from "react-datepicker";
 import { FaCloudDownloadAlt, FaCalendar } from 'react-icons/fa';
@@ -7,13 +7,16 @@ import { ACTIVITIES_LIST } from 'utils/activities';
 import { LoginContext } from 'contexts/LoginContextContainer';
 import { useHistory } from 'react-router-dom';
 import './styles.scss';
+import Spinner from 'components/Spinner';
 
 const RegisterForm = (props) => {
   const { control, register, handleSubmit, formState: { errors } } = useForm();
   const { type, formType, formTitle, submitButtonText, dropText } = props;
   const { setCompanyId } = useContext(LoginContext);
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
   const onSubmit = async (data) => {
+    setLoading(true);
     const formData = new FormData();
     formData.append("file", data.document[0]);
     formData.append("businessType", data.businessType);
@@ -22,17 +25,38 @@ const RegisterForm = (props) => {
     formData.append("firstName", data.firstName);
     formData.append("lastName", data.lastName);
     formData.append("phone", data.phone);
-    formData.append("activityType", data.activityType);
-    if (type === "business") {
-      const response = await api.registerCompany(formData);
-      if (response.success) {
-        alert('Company registered!');
-        setCompanyId(response.data);
-        history.push('/details');
-      } else {
-        alert('Company register failure!');
+    try {
+      if (type === "business") {
+        formData.append("activityType", data.activityType);
       }
+      if (type === "business") {
+        const response = await api.registerCompany(formData);
+        if (response.success) {
+          alert('Company registered!');
+          setCompanyId(response.data);
+          history.push('/details');
+        } else {
+          alert('Company register failure!');
+        }
+        setLoading(false);
+      }
+      if (type === "stream") {
+        const response = await api.uploadVideo(formData);
+        if (response.success) {
+          alert('Video uploads successfully!');
+        } else {
+          alert('Video uploading failure!');
+        }
+        setLoading(false);
+      }
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
     }
+  }
+
+  if (loading) {
+    return <Spinner />;
   }
 
   return (
@@ -125,7 +149,14 @@ const RegisterForm = (props) => {
               <span id='button'><FaCloudDownloadAlt />{dropText ? dropText : 'Drop Your Documents Here'}</span>
             </div>
           </div>}
-          <input className="btn submit" type="submit" value={submitButtonText} />
+          <div className="row">
+            {type === 'stream' ?
+              <input className="btn submit" type="submit" value="UPLOAD VIDEO" />
+            :
+              <input className="btn submit" type="submit" value={submitButtonText} />
+            }
+            {type === 'stream' && <input className="btn submit" type="button" value={submitButtonText} />}
+          </div>
         </form>
       </div>
     </section>

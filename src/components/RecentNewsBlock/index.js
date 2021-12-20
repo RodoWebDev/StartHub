@@ -1,14 +1,10 @@
 import React, { useContext } from 'react';
 import { FaLongArrowAltRight } from 'react-icons/fa';
 import { LoginContext } from 'contexts/LoginContextContainer';
-import Spinner from 'components/Spinner';
 import './styles.scss';
 
 const RecentNewsBlock = () => {
-  const { datas, pagesLoading } = useContext(LoginContext);
-  if (pagesLoading || !datas[0].sections) {
-		return <Spinner />;
-	}
+  const { datas } = useContext(LoginContext);
   const homePage = datas?.filter(data => data.pageTitle === 'Home')[0];
   const newsData = homePage?.sections?.filter(section => section.type === 'News')[0];
   const { title, items } = newsData;

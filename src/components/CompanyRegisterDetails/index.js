@@ -18,7 +18,7 @@ const CompanyRegisterDetails = () => {
     setMember(e.target.value);
   }
   const onSubmit = async (data) => {
-    const payload = {...data, companyId: '61bb106f8289523a2afafb7b'}
+    const payload = {...data, companyId: companyId}
     const response = await api.registerCompanyDetails(payload);
     if (response.success) {
       alert('Company registered!');
@@ -28,7 +28,6 @@ const CompanyRegisterDetails = () => {
     }
   }
   const values = watch();
-  console.log(values)
   const required = () => {
     return <p>Required</p>;
   }

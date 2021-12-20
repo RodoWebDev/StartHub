@@ -36,8 +36,10 @@ const LoginContext = React.createContext({
   user: null,
   pagesLoading: false,
   datas: [],
+  videos: [],
   companyId: null,
   getPageData: async () => {},
+  getVideos: async () => {},
   login: async (email, password) => {},
   register: async (firstName, lastName, email, password) => {},
   logout: () => {},
@@ -51,6 +53,7 @@ const LoginContextContainer = (props) => {
   const [user, setUser] = useLocalStorage('startHubUser', undefined);
   const [companyId, setCompanyId] = useState();
   const [datas, setDatas] = useState(tempDatas);
+  const [videos, setVideos] = useState();
   const [pagesLoading, setPagesLoading] = useState(false);
   /**
    * @return An error object or `undefined` if suceed
@@ -62,6 +65,20 @@ const LoginContextContainer = (props) => {
       const result = await api.getPageData();
       if (result.success) {
         setDatas(result.data);
+      }
+      setPagesLoading(false);
+    } catch (err) {
+      setPagesLoading(false);
+      return err;
+    }
+  }
+
+  const getVideos = async () => {
+    setPagesLoading(true);
+    try{ 
+      const result = await api.getVideos();
+      if (result.success) {
+        setVideos(result.data);
       }
       setPagesLoading(false);
     } catch (err) {
@@ -113,6 +130,7 @@ const LoginContextContainer = (props) => {
 
   useEffect(() => {
     getPageData();
+    getVideos();
   }, [])
 
   return (
@@ -121,12 +139,14 @@ const LoginContextContainer = (props) => {
         user,
         pagesLoading,
         datas,
+        videos,
         companyId,
         login: loginUser,
         logout: logoutUser,
         register: registerUser,
         getPageData,
         setCompanyId,
+        getVideos,
       }}
     >
       { props.children }

@@ -15,7 +15,7 @@ export const PublicRoutes = () => {
   return (
     <Switch>
       <Route exact path='/' component={ Home }/>
-      {/* {companyId && <Route exact path='/details' component={ CompanyDetails }/>} */}
+      {companyId && <Route exact path='/details' component={ CompanyDetails }/>}
       <Route exact path='/details' component={ CompanyDetails }/>
       {subPages?.map((page, index) => (
         <Route path={`/${page.type}`} exact component={CommonPage} key={index} />
@@ -30,7 +30,7 @@ export const PrivateRoutes = () => {
   return (
     <Switch>
       <Route exact path='/' component={ Home }/>
-      {/* {companyId && <Route exact path='/details' component={ CompanyDetails }/>} */}
+      {companyId && <Route exact path='/details' component={ CompanyDetails }/>}
       <Route exact path='/details' component={ CompanyDetails }/>
       {subPages.map((page, index) => (
         <Route path={`/${page.type}`} exact component={CommonPage} key={index} />
