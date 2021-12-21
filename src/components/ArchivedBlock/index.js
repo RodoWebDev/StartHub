@@ -10,7 +10,6 @@ const ArchivedBlock = () => {
 
   return(
     <section className="archived">
-      <div className="container">
         <div className="background-image">
           <img  className="image" src={imgUrl} alt="Archived_Image"></img>
         </div>
@@ -29,7 +28,6 @@ const ArchivedBlock = () => {
             )
           })}
         </div>
-      </div>
     </section>
   )
 }

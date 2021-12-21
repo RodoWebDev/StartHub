@@ -1,5 +1,5 @@
 export const BlockOrder = [
-    'business', 'licensing', 'patenting', 'stream', 'projects', 'funding', 'bank', 'kyc'
+    'business', 'licensing', 'patenting', 'stream', 'projects', 'funding', 'bank', 'kyc', 'find-employees', 'iSAP-university', 'iSAP-Marketing', 'iSAP-domains'
 ]
 
 export const VisaPackage = [

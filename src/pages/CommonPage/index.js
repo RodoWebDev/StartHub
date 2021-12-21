@@ -14,7 +14,14 @@ const CommonPage = (props) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [])
+    const componentType = match.path.replace('/', '');
+    console.log('componentType =>', componentType)
+    if (componentType === 'find-employees') {
+      window.location.href = 'https://www.isap.jobs'
+    } else if (componentType === 'iSAP-domains') {
+      window.location.href = 'https://www.isap.domains'
+    }
+  }, [match.path])
 
   if (pagesLoading || !datas[0].sections) {
 		return <Spinner />;

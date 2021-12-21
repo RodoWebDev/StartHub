@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { FaLongArrowAltRight } from 'react-icons/fa';
 import { LoginContext } from 'contexts/LoginContextContainer';
-import './styles.scss';
 import { BlockOrder } from 'utils/utils';
+import './styles.scss';
 
 const ServicesBlock = () => {
   const { datas } = useContext(LoginContext);
@@ -23,32 +22,17 @@ const ServicesBlock = () => {
         </div>
         <div className="services-container" >
           <div className="services-grid">
-            {/* {subPages?.map((page, index) => (
-              <Link to={`/${page.type}`} className="services-grid-cell" key={items[index].title}>
-                <div>
-                  <h2 className="grid-cell-index">{getNumber(index + 1)}</h2>
-                  <div className="grid-cell-container">
-                    <span className="more-details-link">more <FaLongArrowAltRight /></span>
-                    <div className="grid-cell-title">
-                      <h2>{items[index].title}</h2>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))} */}
-            {/* 01 is Business registration
-            02 is licensing
-            03 Patenting
-            04 Inventors Pitch stream
-            05 projects
-            06 Crowd Funding platform
-            07 bank account services
-            08 KYC Services */}
             {BlockOrder?.map((block, index) => {
               const page = subPages.filter(page => page.type === block)[0];
               if (page) {
+                let url = `/${block}`;
+                if (block === 'find-employees') {
+                  url = 'https://www.isap.jobs'
+                } else if (block === 'iSAP-domains') {
+                  url = 'https://www.isap.domains'
+                }
                 return (
-                  <Link to={`/${block}`} className="services-grid-cell" key={items[index].title}>
+                  <a href={url} className="services-grid-cell" key={items[index].title}>
                     <div>
                       <h2 className="grid-cell-index">{getNumber(index + 1)}</h2>
                       <div className="grid-cell-container">
@@ -58,7 +42,7 @@ const ServicesBlock = () => {
                         </div>
                       </div>
                     </div>
-                  </Link>
+                  </a>
                 )
               } else {
                 return null;
