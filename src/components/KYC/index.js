@@ -6,7 +6,7 @@ const KYC = () => {
   const handleLoad = () => {
     window.GPScreeningWidget && window.GPScreeningWidget.init({
       elementId: "ScreeningWidget",
-      token: "88fc1037-b619-4b33-8679-574efaefb627",
+      token: process.env.KYC_TOKEN,
       hideQr: true,
       onComplete: () => {
         console.log("completed");
