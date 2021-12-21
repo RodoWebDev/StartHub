@@ -22,6 +22,7 @@
     "react-scripts": "4.0.3",
     "react-video-recorder": "^3.19.1",
     "sass": "^1.44.0",
+    "styled-components": "^4.4.1",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
