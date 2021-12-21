@@ -8,7 +8,7 @@ const Videos = () => {
   return(
     <section className="recent-news" id="news">
       <div className="container">
-        {videos.map((video, index) => {
+        {videos?.map((video, index) => {
           const { applicationDate, businessType, email, fileUrl, firstName, lastName, originalname, phone } = video;
           return (
             <article className="news-item" key={index}>

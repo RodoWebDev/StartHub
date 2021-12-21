@@ -1,0 +1,24 @@
+
+.container {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  .kyc {
+    min-height: 400px;
+    padding:15px 80px;
+  }
+  section {
+      padding: 10px 10px;
+      // all: revert
+  }
+  .btn {
+    background: var(--light-red);
+    width: 200px;
+    height: 60px;
+    margin-top: 40px;
+    color: white;
+    border-radius: 50px;
+    border: 1px solid var(--light-red);
+    font-size: 16px;
+  }
+}

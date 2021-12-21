@@ -96,6 +96,23 @@ const api = {
       };
     }
   },
+  uploadRecordedVideo: async (data) => {
+    const headers = {
+      "Content-Type": "form-data"
+    };
+    const result = await instance.post(`${baseUrl}/register/record`, data, headers)
+    if (result.data.data) {
+      return {
+        success: true,
+        data: result.data.data,
+      };
+    } else {
+      return {
+        success: false,
+        message: result.data.message
+      };
+    }
+  },
   registerCompanyDetails: async (data) => {
     const result = await instance.post(`${baseUrl}/register/company/details`, data)
     if (result.data.data) {

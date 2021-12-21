@@ -6,6 +6,7 @@ import { LoginContext } from 'contexts/LoginContextContainer';
 import Layout from 'layout';
 import Spinner from 'components/Spinner';
 import Videos from 'components/Videos';
+import KYC from 'components/KYC';
 
 const CommonPage = (props) => {
   const { match } = props;
@@ -28,11 +29,13 @@ const CommonPage = (props) => {
     submitButtonText,
     dropText,
   }
+  console.log('type =>', type)
   return (
     <Layout pageTitle={pageTitle}>
       <DescriptionList sections={sections}/>
       {containsNews && <RegisterForm {...formData} />}
       {type === 'projects' && <Videos />}
+      {type === 'kyc' && <KYC />}
       <RecentNewsBlock />
     </Layout>
   );

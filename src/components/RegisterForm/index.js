@@ -6,15 +6,48 @@ import api from 'utils/api';
 import { ACTIVITIES_LIST } from 'utils/activities';
 import { LoginContext } from 'contexts/LoginContextContainer';
 import { useHistory } from 'react-router-dom';
-import './styles.scss';
+import VideoRecorder from 'react-video-recorder'
 import Spinner from 'components/Spinner';
+import './styles.scss';
 
 const RegisterForm = (props) => {
   const { control, register, handleSubmit, formState: { errors } } = useForm();
   const { type, formType, formTitle, submitButtonText, dropText } = props;
   const { setCompanyId } = useContext(LoginContext);
   const [loading, setLoading] = useState(false);
+  const [recordedVideo, setRecordedVideo] = useState(false);
   const history = useHistory();
+
+  const onSubmitUploadRecordedVideo = handleSubmit(async data => {
+    setLoading(true);
+    if (!recordedVideo) {
+      alert('Record video first.');
+      setLoading(false);
+      return;
+    }
+    const formData = new FormData();
+    formData.append("file", recordedVideo);
+    formData.append("businessType", data.businessType);
+    formData.append("applicationDate", data.applicationDate);
+    formData.append("email", data.email);
+    formData.append("firstName", data.firstName);
+    formData.append("lastName", data.lastName);
+    formData.append("phone", data.phone);
+    try {
+      if (type === "stream") {
+        const response = await api.uploadRecordedVideo(formData);
+        if (response.success) {
+          alert('Video uploads successfully!');
+        } else {
+          alert('Video uploading failure!');
+        }
+        setLoading(false);
+      }
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
+    }
+  });
   const onSubmit = async (data) => {
     setLoading(true);
     const formData = new FormData();
@@ -149,14 +182,24 @@ const RegisterForm = (props) => {
               <span id='button'><FaCloudDownloadAlt />{dropText ? dropText : 'Drop Your Documents Here'}</span>
             </div>
           </div>}
+          {type === 'stream' ?
+            <input className="btn submit" type="submit" value="UPLOAD VIDEO" />
+          :
+            <input className="btn submit" type="submit" value={submitButtonText} />
+          }
           <div className="row">
-            {type === 'stream' ?
-              <input className="btn submit" type="submit" value="UPLOAD VIDEO" />
-            :
-              <input className="btn submit" type="submit" value={submitButtonText} />
+            {type === 'stream' &&
+              <VideoRecorder
+                onRecordingComplete={videoBlob => {
+                  setRecordedVideo(videoBlob);
+                }}
+                renderDisconnectedView={() => {
+                  setRecordedVideo(undefined);
+                }}
+              />
             }
-            {type === 'stream' && <input className="btn submit" type="button" value={submitButtonText} />}
-          </div>
+            {type === 'stream' && <input className="btn submit" type="button" onClick={onSubmitUploadRecordedVideo} value={submitButtonText} />}
+            </div>
         </form>
       </div>
     </section>
